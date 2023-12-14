@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %} Home | IdeaDraw {% endblock title %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='stylesheets/style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block main_form %}
+<div class="main-form-nav">
+    <div class="nav-tab selected-nav-tab">
+        <p>Create lobby</p>
+    </div>
+    <div class="nav-tab other-nav-tab">
+        <a href="{{ url_for('join') }}">
+            <p>Join lobby</p>
+        </a>
+    </div>
+</div>
+<form method="POST" class="home-form">
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+    <div class="home-form-div">
+        <div class="home-form-label">
+            {{ form.username.label() }}
+            {{ form.roundLength.label() }}
+        </div>
+        <div class="home-form-label">
+            {{ form.username(class="home-form-input") }}
+            {{ form.roundLength(class="home-form-select") }}
+        </div>
+    </div>
+    <div class="home-button-div">
+        {{ form.submit(class="home-button") }}
+    </div>
+</form>
+{% endblock %}
